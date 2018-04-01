@@ -1,4 +1,5 @@
 This repository will extend the "3D-Point-Mass-Movement" repository and add the feature of rotational motion
+
 (Releasing: Sunday, April 8th, 2018)
 
   Model the movement of a ball with no movement of the ball in the up and down position. Consider the point mass as we

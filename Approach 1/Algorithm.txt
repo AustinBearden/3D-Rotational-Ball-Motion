@@ -22,7 +22,7 @@ Physics:
 
 Are we going to assume that there is no skidding?? Sure
 
-Non-slip conditions: 
+Non-slip conditions:
 
 Build in the condition that speed equal to zero means the ball stops
 
@@ -36,4 +36,4 @@ based on starting position, size of ball, speed, and acceleration. Thus, we will
 the conversion between the angular displacement, angular velcoity, and angular acceleration versus
 the linear displacement, velocity, and acceleration respectively.
 
--------------
+--------------

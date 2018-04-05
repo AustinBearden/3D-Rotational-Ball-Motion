@@ -27,3 +27,13 @@ Non-slip conditions:
 Build in the condition that speed equal to zero means the ball stops
 
 Do we want to find out when friction takes out all energy from the ball?
+
+--------------
+
+We are not going to account for friction. We will simply assume non-slip conditions and then
+allow the user to specify a set acceleration. We are ultimatly wanting to find final position
+based on starting position, size of ball, speed, and acceleration. Thus, we will need to include
+the conversion between the angular displacement, angular velcoity, and angular acceleration versus
+the linear displacement, velocity, and acceleration respectively.
+
+-------------

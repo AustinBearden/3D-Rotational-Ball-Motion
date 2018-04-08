@@ -59,6 +59,7 @@ function Ball(radius) {
 
     };
 
+
     //movement method
     //Arguments: Angular velocity of the ball, direction based on angle from the positive X-axis,
     //
@@ -83,31 +84,28 @@ function Ball(radius) {
         
     };
 
-//execute calculations when button is clicked
-function calculate_all() {
-
-    //get values from input boxes
-    var radius_input = parseFloat(document.getElementById('radiusID').value);
-    console.log("Radius: " + radius_input);
-    var time_input = parseFloat(document.getElementById('timeID').value);
-    console.log("Time: " + time_input);
-    var ang_velocity_input = parseFloat(document.getElementById('ang_velocityID').value);
-    console.log("Angular Velocity: " + ang_velocity_input);
-    var XYdirection_input = parseFloat(document.getElementById('XYdirectionID').value);
-    console.log("XYdirection: " + XYdirection_input);
-
-    ball_move_1 = new Ball(radius_input);
-    ball_move_1.move(time_input, ang_velocity_input, XYdirection_input); //incomplete
-    ball_move_1.get_position_X();
-    ball_move_1.get_position_Y();
-    	
 }
 
-//Accesses button from html	
-var calculate = document.getElementById("calculate");
-calculate.addEventListener("click", function() { calculate_all(); } );
+    //execute calculations when button is clicked
+    function calculate_all() {
 
+        //get values from input boxes
+        var radius_input = parseFloat(document.getElementById('radiusID').value);
+        console.log("Radius: " + radius_input);
+        var time_input = parseFloat(document.getElementById('timeID').value);
+        console.log("Time: " + time_input);
+        var ang_velocity_input = parseFloat(document.getElementById('ang_velocityID').value);
+        console.log("Angular Velocity: " + ang_velocity_input);
+        var XYdirection_input = parseFloat(document.getElementById('XYdirectionID').value);
+        console.log("XYdirection: " + XYdirection_input);
 
+        ball_move_1 = new Ball(radius_input);
+        ball_move_1.move_ball(time_input, ang_velocity_input, XYdirection_input);
+        ball_move_1.get_position_X();
+        ball_move_1.get_position_Y();
+            
+    }
 
-
-}
+    //Accesses button from html	
+    var calculate = document.getElementById("calculate");
+    calculate.addEventListener("click", function() { calculate_all(); } );

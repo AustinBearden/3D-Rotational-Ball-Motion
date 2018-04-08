@@ -72,7 +72,16 @@ function Ball(radius) {
         var lin_velcoity = this.Radius * ang_velocity;
         //2) split up the velocity into x and y components
         var x_lin_velocity = lin_velcoity*Math.cos(direction_xy*Math.PI/180);
+        //conditions that set x_final to zero if tbey are zero or negative
+        if(x_lin_velocity <= 0){
+            x_lin_velocity = 0;
+        } else {
+        }
         var y_lin_velocity = lin_velcoity*Math.sin(direction_xy*Math.PI/180);
+        if(y_lin_velocity <= 0){
+            y_lin_velocity = 0;
+        } else {
+        }
         //find linear x and y placement of the ball
         var new_x = this.X + x_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
         var new_y = this.Y + y_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));

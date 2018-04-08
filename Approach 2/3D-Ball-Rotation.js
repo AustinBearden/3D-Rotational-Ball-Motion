@@ -24,8 +24,10 @@ function calculate_all() {
     var my_world = new CANNON.World();
     my_world.gravity.set(0,0,-9.8); // m/sec^2
 
-    var x_ang_velocity = ang_velocity_input * Math.cos(XYdirection_input*Math.PI/180);
-    var y_ang_velocity = ang_velocity_input * Math.sin(XYdirection_input*Math.PI/180);
+    var angular_to_linear = ang_velocity_input * radius_input;
+
+    var x_ang_velocity = angular_to_linear * Math.cos(XYdirection_input*Math.PI/180);
+    var y_ang_velocity = angular_to_linear * Math.sin(XYdirection_input*Math.PI/180);
 
     // Create sphere
     var radius = 5;

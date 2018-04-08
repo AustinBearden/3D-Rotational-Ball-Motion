@@ -65,6 +65,8 @@ function calculate_all() {
     document.getElementById("y-axis").innerHTML = "Y-Position: " + Y_final + " meters";
     console.log("Y position: " + ball_body.position.y);
 
+    console.log("Z position: " + ball_body.position.z);
+
 }
 
 //Accesses button from html

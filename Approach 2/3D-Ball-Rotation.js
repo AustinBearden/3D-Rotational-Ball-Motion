@@ -18,52 +18,50 @@ function calculate_all() {
     var XYdirection_input = parseFloat(document.getElementById('XYdirectionID').value);
     console.log("XYdirection: " + XYdirection_input);
 
+//////////
+
     //create the world
-    var ball_world = new CANNON.World();
-    ball_world.gravity.set(0,0,0); // meters per seconds-squared
+    var my_world = new CANNON.World();
+    my_world.gravity.set(0,0,-9.8); // m/sec^2
 
     var x_ang_velocity = ang_velocity_input * Math.cos(XYdirection_input*Math.PI/180);
-    console.log("X_Velocity_Component: " + x_ang_velocity);
     var y_ang_velocity = ang_velocity_input * Math.sin(XYdirection_input*Math.PI/180);
-    console.log("Y_Velocity_Component: " + y_ang_velocity);
 
-    var my_ball = new CANNON.Body({
-        mass: 5,
-        position: new CANNON.Vec3(0,0,0),
-        shape: new CANNON.Sphere(radius_input),
-        initAngularVelocity : new CANNON.Vec3(x_ang_velocity, y_ang_velocity, 0)
+    // Create sphere
+    var radius = 5;
+    var ball_body = new CANNON.Body({
 
-    });
-
-    //my_ball.angularDamping = 0.1;
-
-    ball_world.addBody(my_ball);
-
-    // Create floor of ball world
-    var world_ground = new CANNON.Body({
-
-        mass: 0 // mass == 0 makes the body static
+        mass: 5, // kg
+        position: new CANNON.Vec3(0,0,0), // m
+        shape: new CANNON.Sphere(radius), // m
+        velocity: new CANNON.Vec3(x_ang_velocity, y_ang_velocity, 0) // speed in m/sec
 
     });
+    my_world.addBody(ball_body); //add our ball the world
 
-    var ground_shape = new CANNON.Plane();
-    world_ground.addShape(ground_shape);
-    ball_world.addBody(world_ground);
+    // Create a plane
+    var ground_body = new CANNON.Body({
 
-    var ball_contact = new CANNON.ContactMaterial( ball_world, my_ball, 0.0, 0.0, 0.0);
+        mass: 0 // mass == 0 make the body static
 
-    ball_world.addContactMaterial(ball_contact);
+    });
+    var ground_shape = new CANNON.Plane(); // creating an instance of the plane shape
+    ground_body.addShape(ground_shape); // telling the ground_body object what shape it has
+    my_world.addBody(ground_body);
 
-    ball_world.step(time_input);
 
-    var X_final = my_ball.position.x;
-    var Y_final = my_ball.position.y;
+    my_world.step(1); // seconds
+
+//////////
+
+    var X_final = ball_body.position.x;
+    var Y_final = ball_body.position.y;
     //output to HTML page
     document.getElementById("x-axis").innerHTML = "X-Position: " + X_final + " meters";
-    console.log("X position: " + my_ball.position.x);
+    console.log("X position: " + ball_body.position.x);
     //output to HTML page
     document.getElementById("y-axis").innerHTML = "Y-Position: " + Y_final + " meters";
-    console.log("Y position: " + my_ball.position.y);
+    console.log("Y position: " + ball_body.position.y);
 
 }
 

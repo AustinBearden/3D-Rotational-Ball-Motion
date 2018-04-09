@@ -56,10 +56,14 @@ function calculate_all() {
 
     my_world.step(1); // seconds
 
+    //need to ratrieve the current velocity after the step of 1
+
 //////////
 
     var X_final = ball_body.position.x;
     var Y_final = ball_body.position.y;
+    var get_velocity = ball_body.velocity;
+    console.log("Velocity_x: " + get_velocity);
     //output to HTML page
     document.getElementById("x-axis").innerHTML = "X-Position: " + X_final + " meters";
     console.log("X position: " + ball_body.position.x);

@@ -39,7 +39,10 @@ function calculate_all() {
         velocity: new CANNON.Vec3(x_ang_velocity, y_ang_velocity, 0) // speed in m/sec
 
     });
+    ball_body.linearDamping = 0.9;
     my_world.addBody(ball_body); //add our ball the world
+
+    //we also need to build in deceleration
 
     // Create a plane
     var ground_body = new CANNON.Body({
@@ -50,7 +53,6 @@ function calculate_all() {
     var ground_shape = new CANNON.Plane(); // creating an instance of the plane shape
     ground_body.addShape(ground_shape); // telling the ground_body object what shape it has
     my_world.addBody(ground_body);
-
 
     my_world.step(1); // seconds
 

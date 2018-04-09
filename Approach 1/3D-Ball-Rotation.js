@@ -33,6 +33,11 @@ function Ball(radius) {
         this.ang_deceleration = new_ang_deceleration;
     };
 
+    this.get_angular_velocity = function() {
+        
+        document.getElementById("ang_velocity_left").innerHTML = "Current Velocity: " + this.angular_velocity + " meters per second";
+    };
+
     this.set_X = function(new_X)
     {
         this.X = new_X;
@@ -72,21 +77,41 @@ function Ball(radius) {
         //2) split up the velocity into x and y components
         var x_lin_velocity = lin_velcoity*Math.cos(direction_xy*Math.PI/180);
         //conditions that set x_final to zero if tbey are zero or negative
-        if(x_lin_velocity <= 0) {
+        if(x_lin_velocity < 0) {
             x_lin_velocity = 0;
-        } else {
         }
         var y_lin_velocity = lin_velcoity*Math.sin(direction_xy*Math.PI/180);
-        if(y_lin_velocity <= 0) {
+        if(y_lin_velocity < 0) {
             y_lin_velocity = 0;
-        } else {
         }
         //find linear x and y placement of the ball
-        var new_x = this.X + x_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
-        var new_y = this.Y + y_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
+        //setting conditions so that the ball doesn't travel backwards with a
+        //deceleration
+        var new_x;
+        var check_term_x = 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
+        if(check_term_x < 0 && Math.abs(check_term_x) > (this.X + x_lin_velocity*time)){
+            new_x = 0;
+        } else {
+            new_x = this.X + x_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
+        }
+        //setting conditions so that the ball doesn't travel backwards with a
+        //deceleration
+        var new_y;
+        var check_term_y = 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
+        if(check_term_y < 0 && Math.abs(check_term_y) > (this.Y + y_lin_velocity*time)) {
+            new_y = 0;
+        } else {
+            new_y = this.Y + y_lin_velocity*time + 0.5*(this.ang_deceleration*this.Radius)*(Math.pow(time, 2));
+        }
 
         //set the balls new position (x and y) and current angular velocity
-        this.set_ang_velocity(ang_velocity + this.ang_deceleration*time);
+        //if ball starts to go to a negative velocity, then it will stop.
+        var potent_new_ang_velocity = ang_velocity + this.ang_deceleration*time;
+        if (potent_new_ang_velocity >= 0) {
+            this.set_ang_velocity(potent_new_ang_velocity);
+        } else {
+            this.set_ang_velocity(0);
+        }
         this.set_X(new_x);
         this.set_Y(new_y);
         
@@ -111,6 +136,7 @@ function Ball(radius) {
         ball_move_1.move_ball(time_input, ang_velocity_input, XYdirection_input);
         ball_move_1.get_position_X();
         ball_move_1.get_position_Y();
+        ball_move_1.get_angular_velocity();
             
     }
 
